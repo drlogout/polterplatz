@@ -1,4 +1,6 @@
 defmodule Polterplatz.Directus.Items do
+  @req_options []
+
   def read(collection_name) do
     url(collection_name)
     |> do_request
@@ -9,7 +11,6 @@ defmodule Polterplatz.Directus.Items do
   end
 
   defp do_request(url) do
-    Req.get!(url, cache: false).body["data"]
-    |> dbg
+    Req.get!(url, @req_options).body["data"]
   end
 end

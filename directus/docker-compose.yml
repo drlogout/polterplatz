@@ -39,7 +39,8 @@ services:
       DB_USER: "postgres"
       DB_PASSWORD: "postgres"
 
-      CACHE_ENABLED: "false"
+      CACHE_ENABLED: "true"
+      CACHE_AUTO_PURGE: "true"
       CACHE_STORE: "redis"
       REDIS: "redis://cache:6379"
 
