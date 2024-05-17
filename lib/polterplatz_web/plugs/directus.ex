@@ -6,7 +6,11 @@ defmodule PolterplatzWeb.Plugs.Directus do
   def call(conn, _options) do
     globals =
       Polterplatz.Directus.globals()
+      |> dbg
 
-    assign(conn, :globals, globals)
+    conn
+    |> assign(:globals, globals)
+    |> assign(:page_title_suffix, " · #{globals["title"]}")
+    |> assign(:page_description, globals["description"])
   end
 end
