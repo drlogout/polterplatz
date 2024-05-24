@@ -1,0 +1,17 @@
+<.container>
+  <div class="z-20 bg-transparent lg:col-span-12">
+    <div class="mx-auto md:max-w-2xl">
+      <.h1>
+        <%= @globals["title"] %> <%= @event["year"] %>
+      </.h1>
+      <p class="mt-4 text-3xl font-display sm:text-4xl text-tertiary drop-shadow-xl">
+        <.date_range :if={@event} event={@event} />
+      </p>
+      <div class="flex gap-4 mt-8"></div>
+    </div>
+  </div>
+  <div class="py-10">
+    <.directus_image :if={@event} image_id={@event["poster"]["id"]} />
+  </div>
+</.container>
+<.programm event={@event} />

@@ -673,10 +673,4 @@ defmodule PolterplatzWeb.CoreComponents do
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
-
-  def live_meta(assigns) do
-    ~H"""
-    <meta name={@name} content={@content} />
-    """
-  end
 end

@@ -85,6 +85,7 @@ defmodule PolterplatzWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import PolterplatzWeb.CoreComponents
+      import PolterplatzWeb.SiteComponents
       import PolterplatzWeb.Gettext
 
       # Shortcut for generating JS commands

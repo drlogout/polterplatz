@@ -6,7 +6,6 @@ defmodule PolterplatzWeb.Plugs.Directus do
   def call(conn, _options) do
     globals =
       Polterplatz.Directus.globals()
-      |> dbg
 
     conn
     |> assign(:globals, globals)

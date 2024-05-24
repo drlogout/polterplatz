@@ -1,0 +1,15 @@
+version: '3'
+services:
+  database:
+    image: postgis/postgis:13-master
+    # Required when running on platform other than amd64, like Apple M1/M2:
+    platform: linux/amd64
+    volumes:
+      - ./initdb.d:/docker-entrypoint-initdb.d
+      - database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: "directus,polterplatz"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - 5432:5432

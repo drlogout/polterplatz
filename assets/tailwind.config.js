@@ -1,7 +1,9 @@
 // See the Tailwind configuration guide for advanced usage
 // https://tailwindcss.com/docs/configuration
 
+const defaultTheme = require('tailwindcss/defaultTheme')
 const plugin = require("tailwindcss/plugin")
+const colors = require('tailwindcss/colors')
 const fs = require("fs")
 const path = require("path")
 
@@ -15,7 +17,49 @@ module.exports = {
     extend: {
       colors: {
         brand: "#FD4F00",
-      }
+      },
+    },
+    colors: {
+      primary: {
+        DEFAULT: colors.red['700'],
+        ...colors.red
+      },
+      secondary: {
+        DEFAULT: colors.green['700'],
+        ...colors.green
+      },
+      tertiary: {
+        DEFAULT: colors.sky['600'],
+        ...colors.sky
+      },
+    },
+    fontFamily: {
+      mono: [
+        // Use a custom mono font for this site by changing 'Anonymous' to the
+        // font name you want and uncommenting the following line.
+        // 'Anonymous',
+        ...defaultTheme.fontFamily.mono,
+      ],
+      sans: [
+        // Use a custom sans serif font for this site by changing 'Gaultier' to the
+        // font name you want and uncommenting the following line.
+        // 'Gaultier',
+        "Roboto",
+        ...defaultTheme.fontFamily.sans,
+      ],
+      serif: [
+        // Use a custom serif font for this site by changing 'Lavigne' to the
+        // font name you want and uncommenting the following line.
+        // 'Lavigne',
+        ...defaultTheme.fontFamily.serif,
+      ],
+      display: [
+        // Use a custom serif font for this site by changing 'Lavigne' to the
+        // font name you want and uncommenting the following line.
+        // 'Lavigne',
+        "Anton",
+        ...defaultTheme.fontFamily.serif,
+      ],
     },
   },
   plugins: [

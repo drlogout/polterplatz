@@ -1,6 +1,8 @@
 defmodule PolterplatzWeb.Router do
   use PolterplatzWeb, :router
 
+  import Polterplatz.Directus.Globals
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,7 +10,6 @@ defmodule PolterplatzWeb.Router do
     plug :put_root_layout, html: {PolterplatzWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug PolterplatzWeb.Plugs.Directus
   end
 
   pipeline :api do
@@ -16,9 +17,13 @@ defmodule PolterplatzWeb.Router do
   end
 
   scope "/", PolterplatzWeb do
-    pipe_through :browser
+    pipe_through [:browser, :get_globals]
 
-    get "/", PageController, :home
+    live_session :get_globals,
+      on_mount: [{Polterplatz.Directus.Globals, :get_globals}] do
+      live "/", FestivalLive.Index, :index
+      live "/:slug", FestivalLive.Page, :page
+    end
   end
 
   # Other scopes may use custom stacks.

@@ -1,7 +1,10 @@
 defmodule Polterplatz.Directus do
-  alias Polterplatz.Directus.Items
+  def query(query) do
+    base_url = Application.get_env(:polterplatz, :directus_url)
 
-  def globals do
-    Items.read("globals")
+    Neuron.Config.set(url: "#{base_url}/graphql")
+
+    {:ok, resp} = Neuron.query(query)
+    resp.body["data"]
   end
 end
