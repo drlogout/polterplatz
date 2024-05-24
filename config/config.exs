@@ -9,8 +9,7 @@ import Config
 
 config :polterplatz,
   ecto_repos: [Polterplatz.Repo],
-  generators: [timestamp_type: :utc_datetime, binary_id: true],
-  directus_url: "http://localhost:8055"
+  generators: [timestamp_type: :utc_datetime, binary_id: true]
 
 # Configures the endpoint
 config :polterplatz, PolterplatzWeb.Endpoint,

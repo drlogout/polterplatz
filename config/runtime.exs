@@ -20,6 +20,8 @@ if System.get_env("PHX_SERVER") do
   config :polterplatz, PolterplatzWeb.Endpoint, server: true
 end
 
+config :polterplatz, :directus_url, System.get_env("POLTERPLATZ_DIRECTUS_URL")
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

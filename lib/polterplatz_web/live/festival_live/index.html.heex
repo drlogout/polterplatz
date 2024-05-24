@@ -11,7 +11,12 @@
     </div>
   </div>
   <div class="py-10">
-    <.directus_image :if={@event} image_id={@event["poster"]["id"]} />
+    <.directus_image
+      :if={@event}
+      image_id={@event["poster"]["id"]}
+      transformations={[width: 650, quality: 80, format: "auto"]}
+      class="rounded-2xl"
+    />
   </div>
 </.container>
 <.programm event={@event} />

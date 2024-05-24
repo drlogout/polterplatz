@@ -128,12 +128,19 @@ defmodule PolterplatzWeb.SiteComponents do
     """
   end
 
+  attr :image_id, :string, required: true
+  attr :transformations, :list, default: []
+  attr :class, :string, default: nil
+
   def directus_image(assigns) do
     ~H"""
     <img
-      src={Image.get_image_url(@image_id)}
+      src={Image.get_image_url(@image_id, @transformations)}
       alt="Poster"
-      class="object-cover w-full h-full rounded-2xl"
+      class={[
+        "object-cover w-full h-auto",
+        @class
+      ]}
     />
     """
   end
