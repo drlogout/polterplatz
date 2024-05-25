@@ -84,6 +84,7 @@ defmodule PolterplatzWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
+      import PolterplatzWeb.SEOComponents
       import PolterplatzWeb.CoreComponents
       import PolterplatzWeb.SiteComponents
       import PolterplatzWeb.Gettext

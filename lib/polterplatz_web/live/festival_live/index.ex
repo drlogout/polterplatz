@@ -25,6 +25,12 @@ defmodule PolterplatzWeb.FestivalLive.Index do
           poster {
             id
           }
+          seo {
+            meta_description
+            og_image {
+              id
+            }
+          }
         }
       }
       """)
@@ -35,6 +41,7 @@ defmodule PolterplatzWeb.FestivalLive.Index do
 
     socket
     |> assign(:page_title, date_range(event))
+    |> assign(:seo, event["seo"])
     |> assign(:event, event)
   end
 

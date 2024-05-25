@@ -60,7 +60,8 @@ defmodule Polterplatz.MixProject do
       {:bandit, "~> 1.2"},
       {:req, "~> 0.4.14"},
       {:neuron, "~> 5.1.0"},
-      {:timex, "~> 3.7"}
+      {:timex, "~> 3.7"},
+      {:html_entities, "~> 0.5.2"}
     ]
   end
 

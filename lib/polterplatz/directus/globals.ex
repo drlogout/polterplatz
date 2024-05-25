@@ -6,8 +6,6 @@ defmodule Polterplatz.Directus.Globals do
 
     conn
     |> assign(:globals, globals)
-    |> assign(:page_title_suffix, " · #{globals["title"]}")
-    |> assign(:page_description, globals["description"])
   end
 
   def on_mount(:get_globals, _params, _session, socket) do
@@ -16,8 +14,6 @@ defmodule Polterplatz.Directus.Globals do
     socket =
       socket
       |> Phoenix.Component.assign(:globals, globals)
-      |> Phoenix.Component.assign(:page_title_suffix, " · #{globals["title"]}")
-      |> Phoenix.Component.assign(:page_description, globals["description"])
 
     {:cont, socket}
   end
@@ -27,8 +23,11 @@ defmodule Polterplatz.Directus.Globals do
       Polterplatz.Directus.query("""
         query {
           globals {
-            title
-            description
+            site_title
+            site_description
+            site_title_prefix
+            site_title_suffix
+            locale
           }
         }
       """)

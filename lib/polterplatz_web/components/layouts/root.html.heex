@@ -4,10 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title suffix={assigns[:page_title_suffix]}>
-      <%= assigns[:page_title] || "Polterplatz" %>
-    </.live_title>
-    <meta name="description" content={assigns[:page_description]} />
+
+    <.title
+      title={assigns[:page_title] || @globals["site_title"]}
+      suffix={@globals["site_title_suffix"]}
+    />
+    <.description seo={assigns[:seo]} />
+    <.open_graph globals={@globals} seo={assigns[:seo]} page_title={assigns[:page_title]} />
 
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
