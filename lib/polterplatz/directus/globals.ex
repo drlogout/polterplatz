@@ -2,18 +2,22 @@ defmodule Polterplatz.Directus.Globals do
   import Plug.Conn
 
   def get_globals(conn, _opts) do
-    conn
-    |> assign(:globals, get_globals())
+    globals = get_globals()
 
-    # |> assign(:page_title_suffix, " · #{globals["title"]}")
-    # |> assign(:page_description, globals["description"])
+    conn
+    |> assign(:globals, globals)
+    |> assign(:page_title_suffix, " · #{globals["title"]}")
+    |> assign(:page_description, globals["description"])
   end
 
   def on_mount(:get_globals, _params, _session, socket) do
+    globals = get_globals()
+
     socket =
-      Phoenix.Component.assign_new(socket, :globals, fn ->
-        get_globals()
-      end)
+      socket
+      |> Phoenix.Component.assign(:globals, globals)
+      |> Phoenix.Component.assign(:page_title_suffix, " · #{globals["title"]}")
+      |> Phoenix.Component.assign(:page_description, globals["description"])
 
     {:cont, socket}
   end

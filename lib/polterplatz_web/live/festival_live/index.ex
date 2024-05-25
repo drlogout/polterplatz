@@ -34,7 +34,14 @@ defmodule PolterplatzWeb.FestivalLive.Index do
       |> List.first()
 
     socket
-    |> assign(:page_title, "Home")
+    |> assign(:page_title, date_range(event))
     |> assign(:event, event)
+  end
+
+  def date_range(event) do
+    day1 = Timex.parse!(event["date_day1"], "{YYYY}-{0M}-{D}")
+    day2 = Timex.parse!(event["date_day2"], "{YYYY}-{0M}-{D}")
+
+    Timex.format!(day1, "{D}.–") <> Timex.format!(day2, "{D}.{0M}.{YYYY}")
   end
 end

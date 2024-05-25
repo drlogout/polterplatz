@@ -5,7 +5,7 @@
         <%= @globals["title"] %> <%= @event["year"] %>
       </.h1>
       <p class="mt-4 text-3xl font-display sm:text-4xl text-tertiary drop-shadow-xl">
-        <.date_range :if={@event} event={@event} />
+        <%= date_range(@event) %>
       </p>
       <div class="flex gap-4 mt-8"></div>
     </div>

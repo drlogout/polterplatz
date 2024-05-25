@@ -27,20 +27,6 @@ defmodule PolterplatzWeb.SiteComponents do
     """
   end
 
-  def date_range(assigns) do
-    day1 = Timex.parse!(assigns.event["date_day1"], "{YYYY}-{0M}-{D}")
-    day2 = Timex.parse!(assigns.event["date_day2"], "{YYYY}-{0M}-{D}")
-
-    assigns =
-      assigns
-      |> assign_new(:day1, fn -> day1 end)
-      |> assign_new(:day2, fn -> day2 end)
-
-    ~H"""
-    <%= Timex.format!(day1, "{D}.–") %><%= Timex.format!(day2, "{D}.{0M}.{YYYY}") %>
-    """
-  end
-
   attr :size, :string, default: "sm"
 
   def container(assigns) do
@@ -145,6 +131,8 @@ defmodule PolterplatzWeb.SiteComponents do
     """
   end
 
+  attr :date, :string, required: true
+
   def date(assigns) do
     date = Timex.parse!(assigns.date, "{YYYY}-{0M}-{D}")
 
@@ -159,9 +147,9 @@ defmodule PolterplatzWeb.SiteComponents do
 
   def h1(assigns) do
     ~H"""
-    <h2 class="text-6xl uppercase font-display sm:text-8xl text-primary drop-shadow-xl">
+    <h1 class="text-6xl uppercase font-display sm:text-8xl text-primary drop-shadow-xl">
       <%= render_slot(@inner_block) %>
-    </h2>
+    </h1>
     """
   end
 
