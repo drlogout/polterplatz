@@ -42,7 +42,7 @@ defmodule PolterplatzWeb.SEOComponents do
       end)
 
     ~H"""
-    <meta property="og:site_name" content={@globals["title"]} />
+    <meta property="og:site_name" content={@globals["site_title"]} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={@globals["locale"]} />
     <meta property="og:url" content={@seo["permalink"] || "/"} />
