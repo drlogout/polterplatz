@@ -9,7 +9,7 @@ defmodule Polterplatz.Application do
   def start(_type, _args) do
     children = [
       PolterplatzWeb.Telemetry,
-      Polterplatz.Repo,
+      # Polterplatz.Repo,
       {DNSCluster, query: Application.get_env(:polterplatz, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Polterplatz.PubSub},
       # Start the Finch HTTP client for sending emails
