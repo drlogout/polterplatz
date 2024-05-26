@@ -6,20 +6,32 @@ defmodule PolterplatzWeb.SEOComponents do
   attr :seo, :map, default: %{}
   attr :page_title, :string, default: ""
 
+  def seo(assigns) do
+    ~H"""
+    <.title globals={@globals} page_title={@page_title} seo={@seo} />
+    <.description seo={@seo} />
+    <.open_graph globals={@globals} page_title={@page_title} seo={@seo} />
+    """
+  end
+
   attr :title, :string, required: true, doc: "The page title."
   attr :prefix, :string, default: nil, doc: "A prefix added before the content of `inner_block`."
   attr :suffix, :string, default: nil, doc: "A suffix added after the content of `inner_block`."
 
   def title(assigns) do
     ~H"""
-    <title data-prefix={@prefix} data-suffix={@suffix}>
-      <%= _title(@prefix, @title, @suffix) |> HtmlEntities.encode() %>
+    <title>
+      <%= _title(@globals, @page_title, @seo) %>
     </title>
     """
   end
 
-  defp _title(prefix, inner_block, suffix) do
-    "#{prefix}#{inner_block}#{suffix}"
+  defp _title(_globals, _page_title, %{"title" => title}) when is_binary(title) do
+    title
+  end
+
+  defp _title(globals, page_title, _seo) do
+    "#{page_title} #{globals["title_separator"] || "·"} #{globals["site_title"]}"
   end
 
   attr :seo, :map, default: %{}
