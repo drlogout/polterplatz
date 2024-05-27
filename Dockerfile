@@ -21,7 +21,7 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
+RUN apt-get update -y && apt-get install -y build-essential git curl \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
@@ -63,7 +63,7 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.39.5/install.sh | b
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # compile assets
-RUN mix cmd npm install
+RUN cd assets && mix cmd npm install
 
 # compile assets
 RUN mix assets.deploy
