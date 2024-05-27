@@ -11,12 +11,14 @@ defmodule PolterplatzWeb.SEOComponents do
     <.title globals={@globals} page_title={@page_title} seo={@seo} />
     <.description seo={@seo} />
     <.open_graph globals={@globals} page_title={@page_title} seo={@seo} />
+    <.no_index_no_follow seo={@seo} />
+    <.cannonical_url seo={@seo} />
     """
   end
 
-  attr :title, :string, required: true, doc: "The page title."
-  attr :prefix, :string, default: nil, doc: "A prefix added before the content of `inner_block`."
-  attr :suffix, :string, default: nil, doc: "A suffix added after the content of `inner_block`."
+  attr :globals, :map, required: true
+  attr :seo, :map, default: %{}
+  attr :page_title, :string, default: ""
 
   def title(assigns) do
     ~H"""
@@ -42,14 +44,18 @@ defmodule PolterplatzWeb.SEOComponents do
     """
   end
 
+  attr :globals, :map, required: true
+  attr :seo, :map, default: %{}
+  attr :page_title, :string, default: ""
+
   def open_graph(assigns) do
     assigns =
       assigns
       |> assign_new(:title, fn ->
         _title(
-          assigns.globals["site_title_prefix"],
+          assigns.globals,
           assigns.page_title,
-          assigns.globals["site_title_suffix"]
+          assigns.seo
         )
       end)
 
@@ -79,6 +85,30 @@ defmodule PolterplatzWeb.SEOComponents do
         |> Phoenix.HTML.raw()
       }
     />
+    """
+  end
+
+  attr :seo, :map, default: %{}
+
+  def no_index_no_follow(assigns) do
+    ~H"""
+    <%= if @seo["no_index"] && @seo["no_follow"] do %>
+      <meta name="robots" content="noindex, nofollow" />
+    <% end %>
+    <%= if @seo["no_nofollow"] do %>
+      <meta name="robots" content="nofollow" />
+    <% end %>
+    <%= if @seo["no_noindex"] do %>
+      <meta name="robots" content="noindex" />
+    <% end %>
+    """
+  end
+
+  def cannonical_url(assigns) do
+    ~H"""
+    <%= if @seo["cannonical"] == "entry" do %>
+      <link rel="canonical" href={@seo["permalink"]} />
+    <% end %>
     """
   end
 end

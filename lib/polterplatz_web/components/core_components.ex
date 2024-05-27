@@ -149,17 +149,6 @@ defmodule PolterplatzWeb.CoreComponents do
     <div id={@id}>
       <.flash kind={:info} title={gettext("Success!")} flash={@flash} />
       <.flash kind={:error} title={gettext("Error!")} flash={@flash} />
-      <.flash
-        id="client-error"
-        kind={:error}
-        title={gettext("We can't find the internet")}
-        phx-disconnected={show(".phx-client-error #client-error")}
-        phx-connected={hide("#client-error")}
-        hidden
-      >
-        <%= gettext("Attempting to reconnect") %>
-        <.icon name="hero-arrow-path" class="w-3 h-3 ml-1 animate-spin" />
-      </.flash>
 
       <.flash
         id="server-error"
