@@ -168,4 +168,16 @@ defmodule PolterplatzWeb.SiteComponents do
     </h3>
     """
   end
+
+  attr :id, :string, required: true
+  attr :lat, :string, required: true
+  attr :lon, :string, required: true
+  attr :zoom, :string, default: "12"
+
+  def map(assigns) do
+    ~H"""
+    <div id={@id} phx-hook="Map" data-lat={@lat} data-lon={@lon} data-zoom={@zoom} class="w-full h-96">
+    </div>
+    """
+  end
 end
