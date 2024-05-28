@@ -4,14 +4,18 @@
     <%= @inner_content %>
   </div>
 </main>
-<footer>
-  <div class="flex justify-between max-w-2xl px-4 py-6 mx-auto text-xs sm:px-6 lg:px-8">
-    <p class="text-sm text-gray-600">
-      &copy; <%= Timex.now().year %>
-    </p>
-    <div class="space-x-1">
-      <a href="https://musikundkulturwildbad.jimdofree.com/about/">Impressum</a>
-      <a href="https://musikundkulturwildbad.jimdofree.com/j/privacy">Datenschutz</a>
-    </div>
+<footer class="px-4 sm:px-6 lg:px-8">
+  <div class="max-w-2xl mx-auto">
+    <.container>
+      <div class="flex justify-between text-xs">
+        <p class="text-gray-600">
+          &copy; <%= Timex.now().year %>
+        </p>
+        <div class="space-x-1">
+          <a href="https://musikundkulturwildbad.jimdofree.com/about/">Impressum</a>
+          <a href="https://musikundkulturwildbad.jimdofree.com/j/privacy">Datenschutz</a>
+        </div>
+      </div>
+    </.container>
   </div>
 </footer>
