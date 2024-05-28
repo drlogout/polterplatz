@@ -80,6 +80,9 @@ defmodule PolterplatzWeb.SiteComponents do
     """
   end
 
+  attr :event, :map, required: true
+  attr :class, :string, default: nil
+
   def programm(assigns) do
     assigns =
       assigns
@@ -87,30 +90,20 @@ defmodule PolterplatzWeb.SiteComponents do
       |> assign_new(:bands_day2, fn -> assigns.event["bands_day2"] end)
 
     ~H"""
-    <section
-      id="table-of-contents"
-      aria-labelledby="table-of-contents-title"
-      class="py-12 scroll-mt-14 sm:scroll-mt-32 sm:py-20 lg:py-24"
-    >
-      <.container>
-        <.h2>Programm</.h2>
-
-        <ol role="list" class="mt-10">
-          <li>
-            <.h3>
-              <.date date={@event["date_day1"]} />
-            </.h3>
-            <.programm_day :if={@event["bands_day1"]} bands={@event["bands_day1"]} class="mt-4 mb-16" />
-          </li>
-          <li>
-            <.h3>
-              <.date date={@event["date_day2"]} />
-            </.h3>
-          </li>
-          <.programm_day :if={@event["bands_day2"]} bands={@event["bands_day2"]} class="mt-4 mb-16" />
-        </ol>
-      </.container>
-    </section>
+    <ol role="list" class={@class}>
+      <li>
+        <.h3>
+          <.date date={@event["date_day1"]} />
+        </.h3>
+        <.programm_day :if={@event["bands_day1"]} bands={@event["bands_day1"]} class="mt-4 mb-16" />
+      </li>
+      <li>
+        <.h3>
+          <.date date={@event["date_day2"]} />
+        </.h3>
+      </li>
+      <.programm_day :if={@event["bands_day2"]} bands={@event["bands_day2"]} class="mt-4 mb-16" />
+    </ol>
     """
   end
 
@@ -173,10 +166,21 @@ defmodule PolterplatzWeb.SiteComponents do
   attr :lat, :string, required: true
   attr :lon, :string, required: true
   attr :zoom, :string, default: "12"
+  attr :class, :string, default: nil
 
   def map(assigns) do
     ~H"""
-    <div id={@id} phx-hook="Map" data-lat={@lat} data-lon={@lon} data-zoom={@zoom} class="w-full h-96">
+    <div
+      id={@id}
+      phx-hook="Map"
+      data-lat={@lat}
+      data-lon={@lon}
+      data-zoom={@zoom}
+      class={[
+        "w-full h-96",
+        @class
+      ]}
+    >
     </div>
     """
   end

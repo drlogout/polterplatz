@@ -29,7 +29,6 @@ let Hooks = {}
 
 Hooks.Map = {
   mounted() {
-    console.log("Map mounted")
     const lat = this.el.getAttribute("data-lat")
     const lon = this.el.getAttribute("data-lon")
     const zoom = this.el.getAttribute("data-zoom")

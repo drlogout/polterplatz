@@ -19,6 +19,13 @@
     />
   </div>
 </.container>
-<.programm event={@event} />
 
-<.map id="polterplatz-map" lat="48.70817" lon="8.54163" />
+<.container>
+  <.h2>Programm</.h2>
+  <.programm event={@event} class="mt-10" />
+</.container>
+
+<.container>
+  <.h2>Anfahrt</.h2>
+  <.map id="polterplatz-map" lat="48.70817" lon="8.54163" class="mt-10" />
+</.container>
